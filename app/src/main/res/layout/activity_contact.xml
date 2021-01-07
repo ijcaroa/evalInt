@@ -6,4 +6,48 @@
     android:layout_height="match_parent"
     tools:context=".ContactActivity">
 
+    <ImageButton
+        android:id="@+id/iBLinked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_linkedin__1_" />
+
+    <ImageView
+        android:id="@+id/ivPhone"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iBLinked"
+        app:srcCompat="@drawable/ic_mobile_screen_share_black_18dp" />
+
+    <fragment
+        android:id="@+id/fragment"
+        android:name="com.example.evalint.MessageFragment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivPhone"
+        app:layout_constraintVertical_bias="0.316" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_instagram"
+        tools:layout_editor_absoluteX="198dp"
+        tools:layout_editor_absoluteY="8dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

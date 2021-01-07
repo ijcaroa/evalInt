@@ -1,64 +1,88 @@
 package com.example.evalint;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link MessageFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.example.evalint.databinding.FragmentMessageBinding;
+
+
 public class MessageFragment extends Fragment {
+    private FragmentMessageBinding mBinding;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+
 
     public MessageFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MessageFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MessageFragment newInstance(String param1, String param2) {
-        MessageFragment fragment = new MessageFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+
+
         }
-    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+    mBinding = FragmentMessageBinding.inflate(inflater,container,false);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_message, container, false);
+        return mBinding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        mBinding.btnContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mBinding.btnContact.setVisibility(View.GONE);
+                mBinding.msgHolder.setVisibility(View.VISIBLE);
+                mBinding.btnSet.setVisibility(View.VISIBLE);
+            }
+        });
+        mBinding.btnSet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mBinding.eTMsg.getText().toString().length() != 0){
+                    String message =mBinding.eTMsg.getText().toString();
+
+                } else {
+                    Toast.makeText(getContext(), "Debes ingresar un mensaje", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+    }
+
+    private void sendMessage(String message){
+
+        String [] emails = {"ignacio.caro@outlook.com"};
+        Intent mIntent = new Intent(Intent.ACTION_SENDTO);
+        mIntent.setData(Uri.parse("mailto:"));
+        mIntent.putExtra(Intent.EXTRA_EMAIL, emails);
+        mIntent.putExtra(Intent.EXTRA_SUBJECT,"CONTACTO ABOUT ME");
+        mIntent.putExtra(Intent.EXTRA_TEXT, message);
+        if (mIntent.resolveActivity(getActivity().getPackageManager()) != null){
+            startActivity(mIntent);
+        } else {
+            Toast.makeText(getContext(), "Debes instalar una app de correo",
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 }

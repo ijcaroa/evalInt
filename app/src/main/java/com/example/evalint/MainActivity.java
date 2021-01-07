@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this,ContactActivity.class);
                 startActivity(intent);
+
             }
         });
         ImageView imageView = findViewById(R.id.iVPortada);
