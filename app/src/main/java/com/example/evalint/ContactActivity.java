@@ -18,12 +18,21 @@ private ActivityContactBinding mBinding;
         mBinding=ActivityContactBinding.inflate(getLayoutInflater());
         setContentView(mBinding.getRoot());
 
+        mBinding.iBInsta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
         mBinding.ivPhone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
             }
         });
+
     }
     private void shareWithWhatsapp (String message){
         Intent mIntent = new Intent(Intent.ACTION_SEND);
@@ -39,8 +48,13 @@ private ActivityContactBinding mBinding;
             Toast.makeText(this, "Debes instalar whatsapp", Toast.LENGTH_SHORT).show();
         }
 
+
+
     }
 
+    private void shareInstagram (View view){
+        Intent mIntent = new Intent(Intent.ACTION_SCREEN_ON);
+    }
 
 
 
